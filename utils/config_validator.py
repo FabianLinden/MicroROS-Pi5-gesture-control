@@ -173,7 +173,7 @@ class ConfigValidator:
             # Check if multipliers are in ascending order
             prev_mult = 0.0
             for level in sorted_levels:
-                mult = multipliers[str(level)]
+                mult = multipliers[level]
                 if mult < prev_mult:
                     errors.append(
                         f"Speed multipliers should be in ascending order. "
