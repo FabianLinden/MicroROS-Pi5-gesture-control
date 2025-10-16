@@ -1,0 +1,122 @@
+# Gesture Control Configuration for MicroROS-Pi5
+
+# Camera Settings
+camera_width: 640
+camera_height: 480
+fps: 30
+show_visualization: true
+
+# Gesture Detection Settings
+min_detection_confidence: 0.7
+min_tracking_confidence: 0.5
+gesture_history_size: 30
+min_movement_threshold: 0.03
+gesture_cooldown: 0.5  # seconds
+
+# Gesture Smoothing & Confidence
+gesture_smoothing_window: 3  # Number of frames for voting mechanism
+min_confidence_threshold: 0.7  # Minimum confidence to accept gesture (0.0-1.0)
+
+# ROS2 Topics
+ros_topics:
+  cmd_vel: "/cmd_vel"
+  servo_control: "/servo_control"
+  gesture_status: "/gesture_status"
+
+# Robot Limits
+robot_limits:
+  max_linear_speed: 0.5  # m/s
+  max_angular_speed: 1.0  # rad/s
+  gimbal_step: 10.0  # degrees
+
+# Speed Multipliers (levels 1-5)
+speed_multipliers:
+  1: 0.2
+  2: 0.4
+  3: 0.6
+  4: 0.8
+  5: 1.0
+
+# Safety Settings
+safety_timeout: 2.0  # seconds - stop robot if no gesture detected
+
+# Logging Settings
+log_level: "INFO"  # Options: DEBUG, INFO, WARN, ERROR, CRITICAL
+
+# Visualization Settings
+visualization:
+  show_landmarks: true
+  show_gesture_name: true
+  show_command: true
+  show_mode: true
+  show_speed_level: true
+  text_color: [0, 255, 0]  # Green
+  landmark_color: [0, 0, 255]  # Red
+  connection_color: [0, 255, 0]  # Green
+  font_scale: 0.7
+  font_thickness: 2
+
+# Gesture Mappings (reference - actual mappings in gesture_mapper.py)
+gesture_reference:
+  static_gestures:
+    - name: "open_palm"
+      function: "Emergency Stop"
+      fingers: "all extended"
+    
+    - name: "fist"
+      function: "Hold Position"
+      fingers: "all folded"
+    
+    - name: "thumbs_up"
+      function: "Move Forward"
+      fingers: "thumb up"
+    
+    - name: "thumbs_down"
+      function: "Move Backward"
+      fingers: "thumb down"
+    
+    - name: "peace_sign"
+      function: "Switch to Gimbal Mode"
+      fingers: "index and middle extended"
+    
+    - name: "pointing"
+      function: "Precision Mode"
+      fingers: "index extended"
+    
+    - name: "ok_sign"
+      function: "Center Gimbal"
+      fingers: "thumb and index touching"
+    
+    - name: "count_1-5"
+      function: "Set Speed Level"
+      fingers: "1-5 fingers extended"
+  
+  dynamic_gestures:
+    - name: "swipe_left"
+      function: "Turn Left"
+      motion: "horizontal left"
+    
+    - name: "swipe_right"
+      function: "Turn Right"
+      motion: "horizontal right"
+    
+    - name: "swipe_up"
+      function: "Increase Speed / Gimbal Tilt Up"
+      motion: "vertical up"
+    
+    - name: "swipe_down"
+      function: "Decrease Speed / Gimbal Tilt Down"
+      motion: "vertical down"
+    
+    - name: "circle_clockwise"
+      function: "Rotate Clockwise"
+      motion: "circular CW"
+    
+    - name: "circle_counter_clockwise"
+      function: "Rotate Counter-Clockwise"
+      motion: "circular CCW"
+    
+    - name: "wave"
+      function: "Switch to Movement Mode"
+      motion: "repeated left-right"
+
