@@ -56,11 +56,11 @@ class ConfigValidator:
             'type': dict,
             'required': True,
             'schema': {
-                '1': {'type': float, 'min': 0.0, 'max': 1.0, 'required': True},
-                '2': {'type': float, 'min': 0.0, 'max': 1.0, 'required': True},
-                '3': {'type': float, 'min': 0.0, 'max': 1.0, 'required': True},
-                '4': {'type': float, 'min': 0.0, 'max': 1.0, 'required': True},
-                '5': {'type': float, 'min': 0.0, 'max': 1.0, 'required': True}
+                1: {'type': float, 'min': 0.0, 'max': 1.0, 'required': True},
+                2: {'type': float, 'min': 0.0, 'max': 1.0, 'required': True},
+                3: {'type': float, 'min': 0.0, 'max': 1.0, 'required': True},
+                4: {'type': float, 'min': 0.0, 'max': 1.0, 'required': True},
+                5: {'type': float, 'min': 0.0, 'max': 1.0, 'required': True}
             }
         },
         

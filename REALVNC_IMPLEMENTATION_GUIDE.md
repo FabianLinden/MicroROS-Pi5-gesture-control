@@ -165,7 +165,7 @@ Before starting, ensure you have:
    # Reconnect VNC and try again
    ```
 
-5. **Press 'q' to close camera test**
+5. **Press 'q' to close camera test** - **Hover over the camera screen and press q**
 
 ---
 
