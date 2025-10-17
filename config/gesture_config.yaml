@@ -1,8 +1,8 @@
 # Gesture Control Configuration for MicroROS-Pi5
 
 # Camera Settings
-camera_width: 640
-camera_height: 480
+camera_width: 1280  # Increased for Dell monitor (was 640)
+camera_height: 720  # Increased for Dell monitor (was 480)
 fps: 30
 show_visualization: true
 
@@ -11,11 +11,11 @@ min_detection_confidence: 0.7
 min_tracking_confidence: 0.5
 gesture_history_size: 30
 min_movement_threshold: 0.03
-gesture_cooldown: 0.5  # seconds
+gesture_cooldown: 0.3  # seconds (reduced for faster response)
 
 # Gesture Smoothing & Confidence
-gesture_smoothing_window: 3  # Number of frames for voting mechanism
-min_confidence_threshold: 0.7  # Minimum confidence to accept gesture (0.0-1.0)
+gesture_smoothing_window: 2  # Number of frames for voting mechanism (reduced for faster response)
+min_confidence_threshold: 0.6  # Minimum confidence to accept gesture (0.0-1.0) (lowered for easier detection)
 
 # ROS2 Topics
 ros_topics:
