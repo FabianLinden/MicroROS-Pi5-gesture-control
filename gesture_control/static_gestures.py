@@ -82,6 +82,10 @@ class StaticGestureDetector:
             return "peace_sign", 0.90
         
         elif fingers_up == [0, 1, 0, 0, 0]:
+            # Detect pointing direction
+            pointing_dir = self._detect_pointing_direction(landmarks)
+            if pointing_dir:
+                return pointing_dir, 0.90
             return "pointing", 0.90
         
         elif self._is_ok_sign(landmarks, fingers_up):
@@ -163,6 +167,43 @@ class StaticGestureDetector:
         
         # OK sign if distance is small and other fingers are up
         return distance < 0.05 and fingers_up[2:] == [1, 1, 1]
+    
+    def _detect_pointing_direction(self, landmarks) -> Optional[str]:
+        """
+        Detect which direction the index finger is pointing
+        
+        Returns:
+            Direction: "pointing_up", "pointing_down", "pointing_left", "pointing_right", or None
+        """
+        # Get index finger tip and base
+        index_tip = landmarks[self.mp_hands.HandLandmark.INDEX_FINGER_TIP]
+        index_mcp = landmarks[self.mp_hands.HandLandmark.INDEX_FINGER_MCP]
+        wrist = landmarks[self.mp_hands.HandLandmark.WRIST]
+        
+        # Calculate pointing vector (from base to tip)
+        dx = index_tip.x - index_mcp.x
+        dy = index_tip.y - index_mcp.y
+        
+        # Determine primary direction based on larger component
+        # Use a threshold to ensure clear directional intent
+        threshold = 0.05  # Minimum movement to register direction
+        
+        if abs(dx) < threshold and abs(dy) < threshold:
+            return None  # Not pointing clearly in any direction
+        
+        # Check if pointing is more horizontal or vertical
+        if abs(dx) > abs(dy) * 1.3:  # Horizontal pointing (left/right)
+            if dx > 0:
+                return "pointing_right"
+            else:
+                return "pointing_left"
+        elif abs(dy) > abs(dx) * 1.3:  # Vertical pointing (up/down)
+            if dy < 0:  # y decreases going up in image coordinates
+                return "pointing_up"
+            else:
+                return "pointing_down"
+        
+        return None  # Diagonal or unclear direction
     
     def _distance(self, point1, point2) -> float:
         """Calculate Euclidean distance between two landmarks"""

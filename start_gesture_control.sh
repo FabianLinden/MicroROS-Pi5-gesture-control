@@ -38,3 +38,6 @@ echo ""
 echo "👋 Gesture control stopped."
 echo "   Robot has been stopped safely."
 
+
+exit 0
+

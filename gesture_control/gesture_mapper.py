@@ -39,12 +39,16 @@ class GestureMapper:
         self.movement_mappings = {
             "thumbs_up": "move_forward",
             "thumbs_down": "move_backward",
+            "pointing_up": "move_forward",      # NEW: Point up to move forward
+            "pointing_down": "move_backward",   # NEW: Point down to move backward
+            "pointing_left": "turn_left",       # NEW: Point left to turn left
+            "pointing_right": "turn_right",     # NEW: Point right to turn right
             "swipe_left": "turn_left",
             "swipe_right": "turn_right",
             "circle_clockwise": "rotate_clockwise",
             "circle_counter_clockwise": "rotate_counter_clockwise",
             "peace_sign": "switch_mode_gimbal",
-            "pointing": "switch_mode_precision",
+            "pointing": "switch_mode_precision",  # Generic pointing (no clear direction)
         }
         
         # Advanced Movement Mode - Speed and rotation control
@@ -73,6 +77,10 @@ class GestureMapper:
         self.precision_mappings = {
             "thumbs_up": "move_forward_slow",
             "thumbs_down": "move_backward_slow",
+            "pointing_up": "move_forward_slow",      # NEW: Point up for slow forward
+            "pointing_down": "move_backward_slow",   # NEW: Point down for slow backward
+            "pointing_left": "turn_left_slow",       # NEW: Point left for slow left turn
+            "pointing_right": "turn_right_slow",     # NEW: Point right for slow right turn
             "swipe_left": "turn_left_slow",
             "swipe_right": "turn_right_slow",
             "wave": "switch_mode_movement",
